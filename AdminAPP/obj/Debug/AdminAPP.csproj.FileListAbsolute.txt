@@ -1,0 +1,11 @@
+C:\Users\ICG-Engineering\Documents\C.Projects\AdminAPP\bin\Debug\AdminAPP.exe.config
+C:\Users\ICG-Engineering\Documents\C.Projects\AdminAPP\bin\Debug\AdminAPP.exe
+C:\Users\ICG-Engineering\Documents\C.Projects\AdminAPP\bin\Debug\AdminAPP.pdb
+C:\Users\ICG-Engineering\Documents\C.Projects\AdminAPP\obj\Debug\AdminAPP.csproj.SuggestedBindingRedirects.cache
+C:\Users\ICG-Engineering\Documents\C.Projects\AdminAPP\obj\Debug\AdminAPP.Form1.resources
+C:\Users\ICG-Engineering\Documents\C.Projects\AdminAPP\obj\Debug\AdminAPP.Properties.Resources.resources
+C:\Users\ICG-Engineering\Documents\C.Projects\AdminAPP\obj\Debug\AdminAPP.csproj.GenerateResource.cache
+C:\Users\ICG-Engineering\Documents\C.Projects\AdminAPP\obj\Debug\AdminAPP.csproj.CoreCompileInputs.cache
+C:\Users\ICG-Engineering\Documents\C.Projects\AdminAPP\obj\Debug\AdminAPP.exe
+C:\Users\ICG-Engineering\Documents\C.Projects\AdminAPP\obj\Debug\AdminAPP.pdb
+C:\Users\ICG-Engineering\Documents\C.Projects\AdminAPP\obj\Debug\AdminAPP.csproj.AssemblyReference.cache
