@@ -17,13 +17,19 @@ namespace AdminAPP
         int indexModules;
         int indexFields;
         int indexParameters;
+        bool changenotsave;
+        bool blockcontrolread;
 
         public Form1()
         {
             InitializeComponent();
 
+            changenotsave = false;
+            blockcontrolread = false;
             configs = new AdminAPPman();
             configs.read();
+
+            DialogResult sus = MessageBox.Show("Task failed successfully", "Good Day Sir", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             foreach (xmlcontent.BazaModule element in configs.content.Module)
             {
@@ -44,6 +50,29 @@ namespace AdminAPP
             DateFromDTP.Enabled = false;
             DateToDTP.Enabled = false;
             comboBoxType.SelectedIndex = -1;
+            this.SaveButton.Enabled = false;
+        }
+        private void SaveTextWhenChanged()
+        {
+            //xmlcontent.BazaModuleFieldParameter parameter = new xmlcontent.BazaModuleFieldParameter();
+            if (blockcontrolread)
+            {
+                return;
+            }
+            ref xmlcontent.BazaModuleFieldParameter parameter_reference = ref configs.content.Module[indexModules].Field[indexFields].Parameter[indexParameters];
+
+            //parameter.ID = (uint)Int32.Parse(IDText.Text);
+            parameter_reference.VALUE = ValueText.Text;
+            parameter_reference.DateFrom = DateFromDTP.Text;
+            parameter_reference.DateTo = DateToDTP.Text;
+            //parameter_reference.name = configs.content.Module[indexModules].Field[indexFields].Parameter[indexParameters].name;
+
+            if (comboBoxType.SelectedIndex == 1)
+                parameter_reference.Type = "string";
+            else if (comboBoxType.SelectedIndex == 0)
+                parameter_reference.Type = "number";
+            else if (comboBoxType.SelectedIndex == 2)
+                parameter_reference.Type = "boolean";
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -66,15 +95,13 @@ namespace AdminAPP
             Console.WriteLine(Modules.SelectedValue);
         }
 
-        private void Add_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void ModuleIndexChange(object sender, EventArgs e)
         {
+            blockcontrolread = true;
             indexModules = Modules.SelectedIndex;
-
+            if (indexModules == -1)
+                return;
             ClearParametersFields();
             Fields.Items.Clear();
             Parameters.Items.Clear();
@@ -83,12 +110,15 @@ namespace AdminAPP
             {
                 Fields.Items.Add(field.name);
             }
+            blockcontrolread = false;
         }
 
         private void SelectedIndexFields(object sender, EventArgs e)
         {
+            blockcontrolread = true;
             indexFields = Fields.SelectedIndex;
-
+            if (indexFields == -1)
+                return;
             ClearParametersFields();
             Parameters.Items.Clear();
             xmlcontent.BazaModuleField field = configs.content.Module[indexModules].Field[indexFields];
@@ -96,15 +126,17 @@ namespace AdminAPP
             {
                 Parameters.Items.Add(parameter.name);
             }
-
+            blockcontrolread = false;
         }
 
         private void SelectedIndexParameters(object sender, EventArgs e)
         {
+            blockcontrolread = true;
             indexParameters = Parameters.SelectedIndex;
             if (indexParameters == -1)
                 return;
             ClearParametersFields();
+            
             xmlcontent.BazaModuleFieldParameter parameter = configs.content.Module[indexModules].Field[indexFields].Parameter[indexParameters];
             IDText.Text = parameter.ID.ToString();
             ValueText.Text = parameter.VALUE;
@@ -122,7 +154,24 @@ namespace AdminAPP
                 comboBoxType.SelectedIndex = 2;
                 
             comboBoxType.Enabled = true;
+            this.SaveButton.Enabled = true;
+            blockcontrolread = false;
+        }
+
+        private void OnAdd(object sender, EventArgs e)
+        {
 
         }
+
+        private void OnSave(object sender, EventArgs e)
+        {
+            configs.write();
+        }
+
+        private void TextChanged(object sender, EventArgs e)
+        {
+            SaveTextWhenChanged();
+        }
+
     }
 }

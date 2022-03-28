@@ -12,14 +12,27 @@ namespace AdminAPP
     internal class AdminAPPman
     {
         public Baza content;
+        private string strPath;
+        XmlSerializer serializer;
+
+        public AdminAPPman()
+        {
+            strPath = $"C:\\Users\\ICG-Engineering\\Desktop\\DATA.xml"; 
+            serializer = new XmlSerializer(typeof(Baza));
+        }
+
         public void read()
         {
-            string          strPath     = $"C:\\Users\\ICG-Engineering\\Desktop\\DATA.xml";
-            XmlSerializer   serializer  = new XmlSerializer(typeof(Baza));
-
             using  (Stream reader = new FileStream(strPath, FileMode.Open))
             {
                 content = (Baza)serializer.Deserialize(reader);
+            }
+        }
+        public void write()
+        {
+            using (Stream reader = new FileStream(strPath, FileMode.Create))
+            {
+                serializer.Serialize(reader, content);
             }
         }
     }

@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.SAVE = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.SaveButton = new System.Windows.Forms.Button();
+            this.AddButton = new System.Windows.Forms.Button();
             this.Modules = new System.Windows.Forms.ListBox();
             this.Fields = new System.Windows.Forms.ListBox();
             this.Parameters = new System.Windows.Forms.ListBox();
@@ -48,24 +48,27 @@
             this.comboBoxType = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
-            // SAVE
+            // SaveButton
             // 
-            this.SAVE.Location = new System.Drawing.Point(824, 354);
-            this.SAVE.Name = "SAVE";
-            this.SAVE.Size = new System.Drawing.Size(75, 23);
-            this.SAVE.TabIndex = 3;
-            this.SAVE.Text = "SAVE";
-            this.SAVE.UseVisualStyleBackColor = true;
+            this.SaveButton.Enabled = false;
+            this.SaveButton.Location = new System.Drawing.Point(824, 354);
+            this.SaveButton.Name = "SaveButton";
+            this.SaveButton.Size = new System.Drawing.Size(75, 23);
+            this.SaveButton.TabIndex = 3;
+            this.SaveButton.Text = "SAVE";
+            this.SaveButton.UseVisualStyleBackColor = true;
+            this.SaveButton.Click += new System.EventHandler(this.OnSave);
             // 
-            // button1
+            // AddButton
             // 
-            this.button1.Location = new System.Drawing.Point(743, 354);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "ADD";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.Add_Click);
+            this.AddButton.Enabled = false;
+            this.AddButton.Location = new System.Drawing.Point(743, 354);
+            this.AddButton.Name = "AddButton";
+            this.AddButton.Size = new System.Drawing.Size(75, 23);
+            this.AddButton.TabIndex = 4;
+            this.AddButton.Text = "ADD";
+            this.AddButton.UseVisualStyleBackColor = true;
+            this.AddButton.Click += new System.EventHandler(this.OnAdd);
             // 
             // Modules
             // 
@@ -154,6 +157,7 @@
             this.ValueText.ReadOnly = true;
             this.ValueText.Size = new System.Drawing.Size(200, 20);
             this.ValueText.TabIndex = 14;
+            this.ValueText.TextChanged += new System.EventHandler(this.TextChanged);
             // 
             // DateFromDTP
             // 
@@ -231,8 +235,8 @@
             this.Controls.Add(this.Parameters);
             this.Controls.Add(this.Fields);
             this.Controls.Add(this.Modules);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.SAVE);
+            this.Controls.Add(this.AddButton);
+            this.Controls.Add(this.SaveButton);
             this.Name = "Form1";
             this.Text = "Home";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -242,8 +246,8 @@
         }
 
         #endregion
-        private System.Windows.Forms.Button SAVE;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button SaveButton;
+        private System.Windows.Forms.Button AddButton;
         private System.Windows.Forms.ListBox Modules;
         private System.Windows.Forms.ListBox Fields;
         private System.Windows.Forms.ListBox Parameters;
