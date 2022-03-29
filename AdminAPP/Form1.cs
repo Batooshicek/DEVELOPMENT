@@ -29,8 +29,6 @@ namespace AdminAPP
             configs = new AdminAPPman();
             configs.read();
 
-            DialogResult sus = MessageBox.Show("Task failed successfully", "Good Day Sir", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
             foreach (xmlcontent.BazaModule element in configs.content.Module)
             {
                 Modules.Items.Add(element.name);
@@ -52,13 +50,14 @@ namespace AdminAPP
             comboBoxType.SelectedIndex = -1;
             this.SaveButton.Enabled = false;
         }
-        private void SaveTextWhenChanged()
+        private void SaveParamChanged()
         {
             //xmlcontent.BazaModuleFieldParameter parameter = new xmlcontent.BazaModuleFieldParameter();
             if (blockcontrolread)
             {
                 return;
             }
+            changenotsave = true;
             ref xmlcontent.BazaModuleFieldParameter parameter_reference = ref configs.content.Module[indexModules].Field[indexFields].Parameter[indexParameters];
 
             //parameter.ID = (uint)Int32.Parse(IDText.Text);
@@ -165,13 +164,49 @@ namespace AdminAPP
 
         private void OnSave(object sender, EventArgs e)
         {
+            changenotsave = false;
             configs.write();
+            DialogResult sus = MessageBox.Show("Information was saved!!!", "Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void TextChanged(object sender, EventArgs e)
         {
-            SaveTextWhenChanged();
+            SaveParamChanged();
         }
 
+        private void TypeChange(object sender, EventArgs e)
+        {
+            SaveParamChanged();
+        }
+
+        private void DateFromChange(object sender, EventArgs e)
+        {
+            SaveParamChanged();
+        }
+
+        private void DateToChange(object sender, EventArgs e)
+        {
+            SaveParamChanged();
+        }
+
+        private void OnClosing(object sender, FormClosingEventArgs e)
+        {
+            if (changenotsave)
+            {
+                DialogResult sus = MessageBox.Show("Do you want to save the data before closing?", "STOP", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                if (sus == DialogResult.Yes)
+                {
+                    configs.write();
+                }
+                else if (sus == DialogResult.No)
+                {
+                    // Close and change nothing
+                }
+                else if (sus == DialogResult.Cancel)
+                {
+                    e.Cancel = true;
+                }
+            }
+        }
     }
 }

@@ -167,6 +167,7 @@
             this.DateFromDTP.Name = "DateFromDTP";
             this.DateFromDTP.Size = new System.Drawing.Size(200, 20);
             this.DateFromDTP.TabIndex = 15;
+            this.DateFromDTP.ValueChanged += new System.EventHandler(this.DateFromChange);
             // 
             // DateToDTP
             // 
@@ -176,6 +177,7 @@
             this.DateToDTP.Name = "DateToDTP";
             this.DateToDTP.Size = new System.Drawing.Size(200, 20);
             this.DateToDTP.TabIndex = 16;
+            this.DateToDTP.ValueChanged += new System.EventHandler(this.DateToChange);
             // 
             // label1
             // 
@@ -212,6 +214,7 @@
             this.comboBoxType.Name = "comboBoxType";
             this.comboBoxType.Size = new System.Drawing.Size(202, 21);
             this.comboBoxType.TabIndex = 20;
+            this.comboBoxType.SelectedIndexChanged += new System.EventHandler(this.TypeChange);
             // 
             // Form1
             // 
@@ -239,6 +242,7 @@
             this.Controls.Add(this.SaveButton);
             this.Name = "Form1";
             this.Text = "Home";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OnClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

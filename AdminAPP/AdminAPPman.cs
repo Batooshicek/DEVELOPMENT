@@ -1,11 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using xmlcontent;
 using System.IO;
 using System.Xml.Serialization;
+using System.Configuration;
+using System.Windows.Forms;
 
 namespace AdminAPP
 {
@@ -14,10 +16,25 @@ namespace AdminAPP
         public Baza content;
         private string strPath;
         XmlSerializer serializer;
+        NameValueCollection appSettings;
 
         public AdminAPPman()
         {
-            strPath = $"C:\\Users\\ICG-Engineering\\Desktop\\DATA.xml"; 
+            try
+            {
+                appSettings = ConfigurationManager.AppSettings;
+                if ( appSettings.Count == 0 )
+                {
+                    throw new ConfigurationErrorsException();
+                }
+                strPath = appSettings["XMLPath"];
+            }
+            catch (ConfigurationErrorsException)
+            {
+                MessageBox.Show("Config could not be read", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+           
+            //strPath = $"C:\\Users\\ICG-Engineering\\Desktop\\DATA.xml"; 
             serializer = new XmlSerializer(typeof(Baza));
         }
 
@@ -27,6 +44,21 @@ namespace AdminAPP
             {
                 content = (Baza)serializer.Deserialize(reader);
             }
+
+            foreach (xmlcontent.BazaModule modul in content.Module)
+            {
+                foreach (xmlcontent.BazaModuleField field in modul.Field)
+                {
+                    foreach (xmlcontent.BazaModuleFieldParameter parameter in field.Parameter)
+                    {
+                        parameter.VALUE = parameter.VALUE.Trim();
+                        parameter.Type = parameter.Type.Trim();
+                        parameter.DateTo = parameter.DateTo.Trim();
+                        parameter.DateFrom = parameter.DateFrom.Trim();
+                    }
+                }
+            }
+
         }
         public void write()
         {
