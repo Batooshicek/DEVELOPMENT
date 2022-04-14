@@ -5,6 +5,11 @@
       "ProjectGuid": "7accb49e-fb66-4089-9704-d72ce367fb54",
       "DisplayName": "AdminAPP",
       "ColorIndex": 0
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Miscellaneous Files",
+      "ColorIndex": -1
     }
   },
   "NextColorIndex": 1
