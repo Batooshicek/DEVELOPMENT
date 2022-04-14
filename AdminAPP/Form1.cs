@@ -28,10 +28,12 @@ namespace AdminAPP
             blockcontrolread = false;
             configs = new AdminAPPman();
             configs.read();
-
-            foreach (xmlcontent.BazaModule element in configs.content.Module)
+            if (configs.content != null)
             {
-                Modules.Items.Add(element.name);
+                foreach (xmlcontent.BazaModule element in configs.content.Module)
+                {
+                    Modules.Items.Add(element.name);
+                }
             }
 
             string[] combovalues = { "number", "string", "boolean" };
@@ -52,14 +54,15 @@ namespace AdminAPP
         }
         private void SaveParamChanged()
         {
+
             //xmlcontent.BazaModuleFieldParameter parameter = new xmlcontent.BazaModuleFieldParameter();
             if (blockcontrolread)
             {
                 return;
             }
             changenotsave = true;
-            ref xmlcontent.BazaModuleFieldParameter parameter_reference = ref configs.content.Module[indexModules].Field[indexFields].Parameter[indexParameters];
-
+            xmlcontent.BazaModuleFieldParameter parameter_reference = configs.content.Module[indexModules].Field[indexFields].Parameter[indexParameters];
+            parameter_reference.Modified = true;
             //parameter.ID = (uint)Int32.Parse(IDText.Text);
             parameter_reference.VALUE = ValueText.Text;
             parameter_reference.DateFrom = DateFromDTP.Text;

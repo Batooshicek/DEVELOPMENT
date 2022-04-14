@@ -1,4 +1,6 @@
-﻿namespace xmlcontent
+﻿using System.Collections.Generic;
+
+namespace xmlcontent
 {
 
     // NOTE: Generated code may require at least .NET Framework 4.5 or .NET Core/Standard 2.0.
@@ -10,11 +12,12 @@
     public partial class Baza
     {
 
-        private BazaModule[] moduleField;
+        //private BazaModule[] moduleField;
+        private List<BazaModule> moduleField;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("Module")]
-        public BazaModule[] Module
+        public List<BazaModule> Module
         {
             get
             {
@@ -34,13 +37,14 @@
     public partial class BazaModule
     {
 
-        private BazaModuleField[] fieldField;
+        //private BazaModuleField[] fieldField;
+        private List<BazaModuleField> fieldField;
 
         private string nameField;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("Field")]
-        public BazaModuleField[] Field
+        public List<BazaModuleField> Field
         {
             get
             {
@@ -74,13 +78,14 @@
     public partial class BazaModuleField
     {
 
-        private BazaModuleFieldParameter[] parameterField;
+        //private BazaModuleFieldParameter[] parameterField;
+        private List<BazaModuleFieldParameter> parameterField;
 
         private string nameField;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("Parameter")]
-        public BazaModuleFieldParameter[] Parameter
+        public List<BazaModuleFieldParameter> Parameter
         {
             get
             {
@@ -126,6 +131,19 @@
 
         private uint idField;
 
+        private bool ParameterModified = false;
+
+        public bool Modified
+        {
+            get
+            {
+                return this.ParameterModified;
+            }
+            set
+            {
+                this.ParameterModified = value;
+            }
+        }
         /// <remarks/>
         public string VALUE
         {
