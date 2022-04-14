@@ -1,6 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\AdminAPP",
+    "\\AdminAPP\\Properties"
   ],
+  "SelectedNode": "\\AdminAPP\\AdminAPPman.cs",
   "PreviewInSolutionExplorer": false
 }
