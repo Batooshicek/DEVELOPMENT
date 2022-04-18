@@ -92,7 +92,7 @@ namespace AdminAPP
         {
             using (OracleCommand cmd = conn.CreateCommand())
             {
-                cmd.CommandText = "Select * from configurations order by MODULE, FIELD"; // In loc de * -> denumirile coloanelor
+                cmd.CommandText = "Select id, module, field, parameter, to_char(datefrom, 'DD/MM/YYYY') as DATEFROM, to_char(dateto, 'DD/MM/YYYY') as DATETO, value, type from configurations order by MODULE, FIELD";
                 OracleDataReader reader = cmd.ExecuteReader();
 
                 content = new Baza();
